@@ -1,0 +1,40 @@
+graph TD
+    SPA[Dashboard Web App<br>React.js]
+
+    subgraph API Back-end [API Back-end Node.js]
+        Router[Express Router<br>Redireciona as rotas URLs]
+        
+        subgraph Camada de Controladores
+            Controller[Controllers<br>Extrai req.body e req.params<br>Devolve respostas HTTP]
+        end
+        
+        subgraph Camada de Negócios
+            Service[Services<br>Validações, regras de negócio<br>e tratamento de erros]
+        end
+        
+        subgraph Camada de Dados
+            Repository[Repositories<br>Conexão com Neon DB<br>Executa Queries SQL puras]
+        end
+    end
+
+    DB[(Banco de Dados<br>PostgreSQL)]
+
+    SPA -- "POST /tasks" --> Router
+    Router --> Controller
+    Controller -- "Envia dados brutos" --> Service
+    Service -- "Se válido, autoriza" --> Repository
+    Repository -- "INSERT / UPDATE" --> DB
+    
+    %% Caminho de volta
+    DB -. "Retorna registro criado" .-> Repository
+    Repository -. "Devolve objeto" .-> Service
+    Service -. "Devolve objeto" .-> Controller
+    Controller -. "res.status(201)" .-> SPA
+
+    %% Estilos
+    style SPA fill:#08427b,color:#fff
+    style DB fill:#08427b,color:#fff
+    style Router fill:#85bbf0,color:#000
+    style Controller fill:#85bbf0,color:#000
+    style Service fill:#85bbf0,color:#000
+    style Repository fill:#85bbf0,color:#000

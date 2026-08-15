@@ -1,0 +1,13 @@
+graph TD
+    %% Atores
+    User((Hospital Staff <br> Equipe Médica e Limpeza))
+    
+    %% Sistemas
+    LETO[Sistema LETO\nGestão de giro de Leitos]
+    
+    %% Relações
+    User -- "Acessa o painel, atualiza status de leitos <br> e gerencia tarefas" --> LETO
+    
+    %% Estilos
+    style User fill:#08427b,stroke:#052e56,stroke-width:2px,color:#fff
+    style LETO fill:#1168bd,stroke:#0b4884,stroke-width:2px,color:#fff

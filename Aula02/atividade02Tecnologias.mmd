@@ -1,0 +1,18 @@
+graph TD
+    User((Hospital Staff))
+    
+    subgraph LETO [Sistema LETO]
+        SPA[Dashboard Web App<br>React.js / Vite<br>Interface de usuário do sistema]
+        API[API Rest<br>Node.js / Express<br>Processamento e regras de negócio]
+        DB[(Banco de Dados<br>Neon / PostgreSQL<br>Armazenamento persistente)]
+    end
+
+    User -- "Acessa via Navegador Web" --> LETO
+    SPA -- "Faz requisições HTTP<br>(GET, POST, PUT, DELETE via JSON)" --> API
+    API -- "Lê e grava dados via comandos SQL" --> DB
+
+    %% Estilos
+    style User fill:#08427b,color:#fff
+    style SPA fill:#438dd5,color:#fff,stroke:#285c8e
+    style API fill:#438dd5,color:#fff,stroke:#285c8e
+    style DB fill:#438dd5,color:#fff,stroke:#285c8e
